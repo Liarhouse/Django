@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--headline : h1 ~ h6-->
+    <h2>주소록</h2>
+    <!--http://localhost/adress-->
+    <a href="/">Home</a>
+<!--    <form method = "post" action = "/">-->
+<!--        {% csrf_token %}-->
+<!--        <input type = "submit" value = "Home">-->
+<!--    </form>-->
+    <!--http://localhost/address/write-->
+    <a href="write">등록</a>
+    <br>
+    등록된 주소:{{address_count}}
+<!--    <form method = "post" action = "write">-->
+<!--        {% csrf_token %}-->
+<!--        <input type = "submit" value = "주소록 추가">-->
+<!--    </form>-->
+    <table border="1">
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>전화</th>
+            <th>메일</th>
+            <th>주소</th>
+        </tr>
+        <!-- {'items':items, 'address_count':len(items)}-->
+        {% for row in items %}
+        <tr>
+            <td><a href="detail?idx={{row.idx}}">{{row.idx}}</td>
+            <!--http://localhost/address/detail?idx=3-->
+            <td><a href="detail?idx={{row.idx}}">{{row.name}}</a></td>
+            <td>{{row.tel}}</td>
+            <td>{{row.email}}</td>
+            <td>{{row.address}}</td>
+        </tr>
+        {% endfor %}
+    </table><br>
+</body>
+</html>

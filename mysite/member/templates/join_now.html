@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% if msg %}
+        <script> alert('{{msg}}') </script>
+    {% endif %}
+</head>
+<body>
+    <h2> 회원 가입 </h2>
+    <form method="post" action="join">
+        {% csrf_token %}
+        ID : <input type = 'text' name = "user_id"><br>
+        PW : <input type="text" name="user_pw"><br>
+        이름 : <input type = 'text' name = "user_name"><br>
+        전화 : <input type = 'text' name = "tel"><br>
+        메일 : <input type = 'text' name = "email"><br>
+        <input type = 'submit' value = "회원 가입">
+        <input type = 'button' value = "Home" onclick="location.href='/'"
+    </form>
+</body>
+</html>

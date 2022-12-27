@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% if msg == 'error' %}
+        <script> alert('이미 존재하는 ID입니다.') </script>
+    {% elif msg == 'iderror' %}
+        <script> alert('존재하지 않는 ID입니다.') </script>
+    {% elif msg == 'pwerror' %}
+        <script> alert('올바르지 않은 비밀번호입니다.') </script>
+    {% endif %}
+</head>
+<body>
+    <h2>어서오세요</h2><hr>
+    1. <a href="/join_now">회원가입</a><br>
+    2. <a href="/login_now">로그인</a><br><hr>
+    *. <a href="/admin">관리자</a><br>
+</body>
+</html>

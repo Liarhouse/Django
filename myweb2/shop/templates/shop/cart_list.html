@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script>
+        function cart_delete(){
+          document.form1.action = 'cart_del';
+          document.form1.submit();
+        }
+
+        function cart_update(){
+          document.form1.action = 'cart_update';
+          document.form1.submit();
+        }
+  </script>
+    <script src="http://code.jquery.com/jquery-3.6.0.js"></script>
+      <script>
+        $(function(){
+          $("#btnList").click(function(){
+              location.href="/shop/product_list";
+           });
+
+           $("#btnDelete").click(function(){
+              if(confirm("장바구니를 비우시겠습니까?")){
+              location.href="/shop/cart_del_all";
+              }
+           });
+        });
+      </script>
+
+</head>
+<body>
+  <h2>장바구니</h2>
+  {% if cartCount == 0 %}
+    <span style="color:red">장바구니가 비어있습니다.</span><br>
+  {% endif %}
+
+  {% if cartCount > 0 %}
+    <form name="form1" method="post">
+      {% csrf_token %}
+      <table border="1" width="400px">
+        <tr>
+          <th><input type="checkbox" id="all" name="check_all"></th>
+          <th>상품명</th>
+          <th>단가</th>
+          <th>수량</th>
+          <th>총금액</th>
+        </tr>
+        {%for row in cartList %}
+        <tr>
+          <td><input type="checkbox" name="cart_idd" value="{{row.cart_id}}"></td>
+          <td>{{row.product_name}}</td>
+          <td>{{row.price}}</td>
+          <!--수량-->
+          <td>
+            <input type="number" style="width:50px;" min="0" max="100" name="amount"
+              value="{{row.amount}}">
+            <!--개별상품 코드값을 hidden으로 넘겨줘야 한다.-->
+            <input type="hidden" name="product_id" value="{{row.product_id}}">
+            <input type="hidden" name="cart_id" value="{{row.cart_id}}">
+          </td>
+          <td>{{row.money}}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+          <td colspan="5" align="right">
+            장바구니 금액 합계 : {{sumMoney}}<br>
+            배송료 : {{fee}}<br>
+            총합계 : {{total}}
+          </td>
+        </tr>
+      </table>
+      <input type="submit" value="수정" onclick="cart_update()">
+      <input type="submit" value="삭제" onclick="cart_delete()">
+    </form>
+  {% endif %}
+  <button type="button" id="btnList">상품목록</button>
+  <button type="button" id="btnDelete">장바구니 비우기</button>
+</body>
+</html>

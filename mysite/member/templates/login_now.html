@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+     {% if msg %}
+        <script> alert('{{msg}}') </script>
+     {% endif %}
+</head>
+<body>
+    <h2>로그인</h2>
+        <form method="post" action="login">
+            {% csrf_token %}
+            <input type="text" name="user_id"><br>
+            <input type="password" name="user_pw"><br>
+            <input type="submit" value="로그인">
+            <input type="button" value="회원 가입" onclick="location.href='join_now'">
+            <input type="button" value="Home" onclick="location.href='/'">
+        </form>
+</body>
+</html>

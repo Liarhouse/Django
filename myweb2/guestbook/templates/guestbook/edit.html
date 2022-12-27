@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function gb_update(){
+            document.form1.action = "update";
+            document.form1.submit();
+        }
+
+        function gb_delete(){
+            if(confirm("진짜로 삭제하시겠습니까?")){
+                document.form1.action = "delete";
+                document.form1.submit();
+                }
+        }
+    </script>
+</head>
+<body>
+    <h2> 방명록 삭제 및 수정</h2>
+    <form method="post" name="form1">
+        {% csrf_token %}
+        <table border="1" width="500px">
+            <tr>
+                <td>작성자</td>
+                <td> <input name="name" size = "40" value="{{row.name}}"></td>
+            </tr>
+            <tr>
+                <td>이메일</td>
+                <td> <input name="email" size = "40" value="{{row.email}}"></td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td> <input type="password" name="passwd" size = "40" value="{{row.passwd}}"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <textarea rows="5" cols="79" name="content">
+                        {{row.content}}
+                    </textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="hidden" name="idx" value="{{row.idx}}">
+                    <input type="button" value="수정" onclick="gb_update()">
+                    <input type="button" value="삭제" onclick="gb_delete()">
+                    <input type="button" value="목록" onclick="location.href='/guestbook'">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
